@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.Scanner;
 
 public class EchoClient {
@@ -26,7 +25,7 @@ public class EchoClient {
 			socket = new Socket();
 			String data = null;
 
-			socket.connect(new InetSocketAddress("192.168.0.69", 5000));
+			socket.connect(new InetSocketAddress(connectAddress, 5000));
 			System.out.println("접속완료");
 			InputStream is = socket.getInputStream();
 			OutputStream os = socket.getOutputStream();
