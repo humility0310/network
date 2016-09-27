@@ -53,8 +53,8 @@ public class EchoServer {
 					pw.close();
 					break;
 				}
-
-				System.out.println("[server]received :" + data);
+				
+				System.out.println("[client]received :" + data);
 				pw.println(data);
 
 			}
