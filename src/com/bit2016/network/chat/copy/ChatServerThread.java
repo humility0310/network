@@ -43,6 +43,7 @@ public class ChatServerThread extends Thread {
 				String[] tockens = line.split(":");
 				if ("JOIN".equals(tockens[0])) {
 					doJoin(tockens[1], pw);
+					continue;
 				} else if ("Quit".equals(line)) {
 					doQuit(name, pw);
 					break;
