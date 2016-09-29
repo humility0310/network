@@ -23,8 +23,8 @@ public class ChatClient {
 			socket = new Socket();
 
 			String connectAddress;
-			// System.out.print("아이피를 입력하세요 :");
-			// connectAddress = sc.nextLine();
+//			 System.out.print("아이피를 입력하세요 :");
+//			 connectAddress = sc.nextLine();
 
 			socket.connect(new InetSocketAddress("192.168.1.19", 6635));
 			System.out.println("접속완료");
@@ -42,11 +42,11 @@ public class ChatClient {
 			while (true) {
 				Thread thread = new ChatClientThread(socket);
 				thread.start();
-				if (("MESSAGE:" + name + ">>Quit").equals(message)) {
+				if ("Quit".equals(message)) {
 					pw.println("Quit");
 					break;
 				}
-				message = "MESSAGE:" + name + ">>" + sc.nextLine();
+				message = sc.nextLine();
 				pw.println(message);
 
 			}

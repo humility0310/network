@@ -46,12 +46,10 @@ public class ChatServerThread extends Thread {
 				String[] tockens = line.split(":");
 				if ("JOIN".equals(tockens[0])) {
 					doJoin(tockens[1], pw);
-				} else if ("Quit".equals(tockens[0])) {
+				} else if ("Quit".equals(line)) {
 					doQuit(name, pw);
 					break;
-				} else if ("MESSAGE".equals(tockens[0])) {
-					doMessage(tockens[1], pw);
-				}
+				}doMessage(name,line);
 			}
 
 		} catch (UnsupportedEncodingException e) {
@@ -80,9 +78,9 @@ public class ChatServerThread extends Thread {
 		deletePrintWriter(printWriter);
 	}
 
-	private void doMessage(String message, PrintWriter printWriter) {
+	private void doMessage(String name,String message) {
 
-		broadcastMessage(message);
+		broadcastMessage(name + ":" + message);
 	}
 
 	private void doJoin(String name, PrintWriter printWriter) {
