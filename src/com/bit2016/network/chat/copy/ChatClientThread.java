@@ -9,7 +9,6 @@ import java.net.Socket;
 public class ChatClientThread extends Thread {
 
 	private Socket socket;
-	private String message;
 
 	public ChatClientThread(Socket socket) {
 		this.socket = socket;
@@ -31,6 +30,14 @@ public class ChatClientThread extends Thread {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (socket.isClosed() == false && socket != null) {
+					socket.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}

@@ -10,13 +10,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.List;
 
-import org.w3c.dom.NamedNodeMap;
-
 public class ChatServerThread extends Thread {
 	private Socket socket;
 	private String name;
-	private String message;
-
+	
 	private List<PrintWriter> listPrintWriter;
 
 	public ChatServerThread(Socket socket, List<PrintWriter> listPrintWriter) {
