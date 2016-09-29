@@ -43,7 +43,7 @@ public class ChatClient {
 				Thread thread = new ChatClientThread(socket);
 				thread.start();
 				if ("Quit".equals(message)) {
-					pw.println("Quit");
+					System.out.println("");
 					break;
 				}
 				message = sc.nextLine();
