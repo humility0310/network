@@ -10,6 +10,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.List;
 
+import org.w3c.dom.NamedNodeMap;
+
 public class ChatServerThread extends Thread {
 	private Socket socket;
 	private String name;
@@ -44,25 +46,26 @@ public class ChatServerThread extends Thread {
 				String[] tockens = line.split(":");
 				if ("JOIN".equals(tockens[0])) {
 					doJoin(tockens[1], pw);
-					} else if ("MESSAGE".equals(tockens[0])) {
-					doMessage(tockens[1], pw);
 				} else if ("Quit".equals(tockens[0])) {
 					doQuit(name, pw);
 					break;
+				} else if ("MESSAGE".equals(tockens[0])) {
+					doMessage(tockens[1], pw);
 				}
 			}
 
 		} catch (UnsupportedEncodingException e) {
 			ChatServer.consoleLog("error" + e);
 		} catch (IOException e) {
-			ChatServer.consoleLog("error" + e);
+			ChatServer.consoleLog("error1" + e);
+			broadcastMessage(name + "님이 퇴장하였습니다");
 		} finally {
 			try {
 				if (socket.isClosed() == false && socket != null) {
 					socket.close();
 				}
 			} catch (IOException e) {
-				ChatServer.consoleLog("error" + e);
+				ChatServer.consoleLog("error2" + e);
 			}
 		}
 	}
@@ -94,7 +97,7 @@ public class ChatServerThread extends Thread {
 		addPrintWriter(printWriter);
 
 		// ack
-//		printWriter.println("Join: OK");
+		// printWriter.println("Join: OK");
 	}
 
 	private void addPrintWriter(PrintWriter printWriter) {

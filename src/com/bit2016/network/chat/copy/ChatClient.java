@@ -31,24 +31,24 @@ public class ChatClient {
 			InputStream is = socket.getInputStream();
 			OutputStream os = socket.getOutputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-			PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,"UTF-8"), true);
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(os, "UTF-8"), true);
 
+			if ("".equals(name)) {
+				System.out.print("닉네임을 입력해 주세요>>");
+				name = sc.nextLine();
+				System.out.println("[" + name + "]님 환영합니다.");
+				pw.println("JOIN:" + name);
+			}
 			while (true) {
-				if ("".equals(name)) {
-					System.out.print("닉네임을 입력해 주세요>>");
-					name = sc.nextLine();
-					System.out.println("[" + name + "]님 환영합니다.");
-					pw.println("JOIN:" + name);
-				}
-				if (("MESSAGE:"+ name + ">>Quit").equals(message)) {
+				Thread thread = new ChatClientThread(socket);
+				thread.start();
+				if (("MESSAGE:" + name + ">>Quit").equals(message)) {
 					pw.println("Quit");
 					break;
 				}
-				message = "MESSAGE:"+ name + ">>" + sc.nextLine();
+				message = "MESSAGE:" + name + ">>" + sc.nextLine();
 				pw.println(message);
 
-				Thread thread = new ChatClientThread(socket);
-				thread.start();
 			}
 
 		} catch (ConnectException e) {
