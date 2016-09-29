@@ -31,7 +31,7 @@ public class ChatClient {
 			InputStream is = socket.getInputStream();
 			OutputStream os = socket.getOutputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-			PrintWriter pw = new PrintWriter(new OutputStreamWriter(os), true);
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,"UTF-8"), true);
 
 			while (true) {
 				if ("".equals(name)) {
